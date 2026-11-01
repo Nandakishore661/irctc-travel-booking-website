@@ -1,0 +1,274 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelGo | Train & Bus Booking</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<header class="navbar">
+    <a class="logo" href="index.html"><i class="fa-solid fa-route"></i> Travel<span>Go</span></a>
+    <button class="mobile-menu" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
+    <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="#destinations">Destinations</a>
+        <a href="#services">Services</a>
+        <a href="tracking.html">Tracking</a>
+        <a href="my-bookings.html">My Bookings</a>
+    </nav>
+    <a href="my-bookings.html" class="login-btn"><i class="fa-regular fa-user"></i> My Account</a>
+</header>
+
+<section class="mode-section">
+    <button class="mode-btn active" id="trainTab" onclick="switchMode('train')">
+        <i class="fa-solid fa-train"></i> Train Booking
+    </button>
+    <button class="mode-btn" id="busTab" onclick="switchMode('bus')">
+        <i class="fa-solid fa-bus"></i> Bus Booking
+    </button>
+</section>
+
+<!-- TRAIN HOMEPAGE -->
+<main id="trainPage">
+    <section class="hero train-hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="hero-tag">YOUR JOURNEY STARTS HERE</span>
+            <h1>Explore India<br>with <span>Railways</span></h1>
+            <p>Discover beautiful destinations and enjoy comfortable railway journeys.</p>
+
+            <div class="search-box">
+                <div class="search-field">
+                    <label>FROM STATION</label>
+                    <input id="trainFrom" placeholder="Hyderabad">
+                </div>
+                <button class="swap-btn" onclick="swapCities('train')">⇄</button>
+                <div class="search-field">
+                    <label>TO STATION</label>
+                    <input id="trainTo" placeholder="Bangalore">
+                </div>
+                <div class="search-field">
+                    <label>JOURNEY DATE</label>
+                    <input type="date" id="trainDate">
+                </div>
+                <div class="search-field">
+                    <label>TRAVEL CLASS</label>
+                    <select id="trainClass">
+                        <option>All Classes</option>
+                        <option>AC First Class</option>
+                        <option>AC 2 Tier</option>
+                        <option>AC 3 Tier</option>
+                        <option>Sleeper</option>
+                    </select>
+                </div>
+                <button class="search-btn" onclick="searchTrains()">
+                    <i class="fa-solid fa-magnifying-glass"></i> Search Trains
+                </button>
+            </div>
+
+            <div class="hero-stats">
+                <div><strong>500+</strong><span>Destinations</span></div>
+                <div><strong>1000+</strong><span>Daily Services</span></div>
+                <div><strong>24/7</strong><span>Travel Support</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="results-section hidden" id="trainResults">
+        <div class="section-heading">
+            <div><span class="eyebrow">TRAIN SEARCH</span><h2>Available Trains</h2></div>
+        </div>
+        <div id="trainResultList" class="results-grid"></div>
+    </section>
+</main>
+
+<!-- BUS HOMEPAGE -->
+<main id="busPage" class="hidden">
+    <section class="hero bus-hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="hero-tag">COMFORTABLE BUS TRAVEL</span>
+            <h1>Go Anywhere.<br>Travel <span>Better.</span></h1>
+            <p>Find your perfect bus, select your seat and explore India.</p>
+
+            <div class="search-box">
+                <div class="search-field">
+                    <label>FROM CITY</label>
+                    <input id="busFrom" placeholder="Hyderabad">
+                </div>
+                <button class="swap-btn" onclick="swapCities('bus')">⇄</button>
+                <div class="search-field">
+                    <label>TO CITY</label>
+                    <input id="busTo" placeholder="Bangalore">
+                </div>
+                <div class="search-field">
+                    <label>JOURNEY DATE</label>
+                    <input type="date" id="busDate">
+                </div>
+                <div class="search-field">
+                    <label>BUS TYPE</label>
+                    <select id="busType">
+                        <option>All Buses</option>
+                        <option>AC Sleeper</option>
+                        <option>AC Seater</option>
+                        <option>Non-AC Sleeper</option>
+                    </select>
+                </div>
+                <button class="search-btn" onclick="searchBuses()">
+                    <i class="fa-solid fa-magnifying-glass"></i> Search Buses
+                </button>
+            </div>
+
+            <div class="hero-stats">
+                <div><strong>500+</strong><span>Bus Routes</span></div>
+                <div><strong>100+</strong><span>Operators</span></div>
+                <div><strong>24/7</strong><span>Customer Care</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="results-section hidden" id="busResults">
+        <div class="section-heading">
+            <div><span class="eyebrow">YOUR SEARCH RESULTS</span><h2>Available Buses</h2></div>
+        </div>
+        <div class="bus-filters">
+            <select id="busFilter" onchange="filterBuses()">
+                <option value="all">All Bus Types</option>
+                <option value="AC Sleeper">AC Sleeper</option>
+                <option value="AC Seater">AC Seater</option>
+                <option value="Non-AC Sleeper">Non-AC Sleeper</option>
+            </select>
+            <select id="priceFilter" onchange="filterBuses()">
+                <option value="all">All Prices</option>
+                <option value="500">Under ₹500</option>
+                <option value="1000">Under ₹1000</option>
+            </select>
+        </div>
+        <div id="busResultList" class="bus-grid"></div>
+    </section>
+</main>
+
+<!-- WHY TRAVEL WITH US -->
+<section class="section-padding features" id="services">
+    <div class="section-heading center-heading">
+        <span class="eyebrow">WHY TRAVEL WITH US</span>
+        <h2>Experience Better Journeys</h2>
+        <p>Everything you need for a smooth and memorable trip.</p>
+    </div>
+
+    <div class="feature-grid">
+        <article class="feature-card image-feature">
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=700" alt="Beautiful travel destination">
+            <div class="feature-text">
+                <i class="fa-solid fa-ticket"></i>
+                <h3>Easy Ticket Booking</h3>
+                <p>Search and book your train or bus tickets in a few simple steps.</p>
+            </div>
+        </article>
+
+        <article class="feature-card image-feature">
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=700" alt="Online travel support">
+            <div class="feature-text">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h3>Secure Experience</h3>
+                <p>Enjoy a convenient travel booking experience with clear booking details.</p>
+            </div>
+        </article>
+
+        <article class="feature-card image-feature">
+            <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=700" alt="Travel planning">
+            <div class="feature-text">
+                <i class="fa-solid fa-headset"></i>
+                <h3>Travel Assistance</h3>
+                <p>Find important journey information and assistance whenever you need it.</p>
+            </div>
+        </article>
+
+        <article class="feature-card image-feature">
+            <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=700" alt="Mountain travel">
+            <div class="feature-text">
+                <i class="fa-solid fa-map-location-dot"></i>
+                <h3>Explore Destinations</h3>
+                <p>Discover exciting places and plan your next travel adventure.</p>
+            </div>
+        </article>
+    </div>
+</section>
+
+<!-- DESTINATIONS -->
+<section class="section-padding destinations" id="destinations">
+    <div class="section-heading">
+        <div>
+            <span class="eyebrow">EXPLORE INDIA</span>
+            <h2>Popular Destinations</h2>
+            <p>Click any destination to explore details and book your journey.</p>
+        </div>
+    </div>
+
+    <div class="destination-grid">
+        <a class="destination-card" href="destination.html?place=Hyderabad">
+            <img src="https://images.unsplash.com/photo-1567157577867-05ccb1388e66?w=700" alt="Hyderabad">
+            <div class="destination-info"><h3>Hyderabad</h3><p>City of Pearls</p><span>Explore Destination →</span></div>
+        </a>
+
+        <a class="destination-card" href="destination.html?place=Mumbai">
+            <img src="https://images.unsplash.com/photo-1529253355930-ddbe423a2ac7?w=700" alt="Mumbai">
+            <div class="destination-info"><h3>Mumbai</h3><p>City of Dreams</p><span>Explore Destination →</span></div>
+        </a>
+
+        <a class="destination-card" href="destination.html?place=Delhi">
+            <img src="https://images.unsplash.com/photo-1587474260584-136574528ed5?w=700" alt="Delhi">
+            <div class="destination-info"><h3>Delhi</h3><p>Capital of India</p><span>Explore Destination →</span></div>
+        </a>
+
+        <a class="destination-card" href="destination.html?place=Kerala">
+            <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=700" alt="Kerala">
+            <div class="destination-info"><h3>Kerala</h3><p>God's Own Country</p><span>Explore Destination →</span></div>
+        </a>
+
+        <a class="destination-card" href="destination.html?place=Jaipur">
+            <img src="https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?w=700" alt="Jaipur">
+            <div class="destination-info"><h3>Jaipur</h3><p>Pink City</p><span>Explore Destination →</span></div>
+        </a>
+
+        <a class="destination-card" href="destination.html?place=Goa">
+            <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=700" alt="Goa">
+            <div class="destination-info"><h3>Goa</h3><p>Beaches and Adventures</p><span>Explore Destination →</span></div>
+        </a>
+    </div>
+</section>
+
+<!-- TRACKING BANNER -->
+<section class="tracking-banner">
+    <div>
+        <span class="eyebrow">JOURNEY UPDATES</span>
+        <h2>Where is your vehicle right now?</h2>
+        <p>Check demo train and bus tracking information from one place.</p>
+        <a href="tracking.html" class="primary-btn">Track Your Journey <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=900" alt="Travel landscape">
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-grid">
+        <div>
+            <a class="logo footer-logo" href="index.html"> <i class="fa-solid fa-route"></i> Travel<span>Go</span></a>
+            <p>Your journey, our priority. Explore India with convenient travel booking.</p>
+        </div>
+        <div><h3>Explore</h3><a href="#destinations">Destinations</a><a href="#services">Services</a></div>
+        <div><h3>Bookings</h3><a href="index.html" onclick="switchMode('train')">Train Booking</a><a href="index.html" onclick="switchMode('bus')">Bus Booking</a><a href="my-bookings.html">My Bookings</a></div>
+        <div><h3>Travel Support</h3><a href="tracking.html">Track Journey</a><p>support@travelgo.com</p></div>
+    </div>
+    <div class="copyright">© 2026 TravelGo. Educational frontend demonstration.</div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

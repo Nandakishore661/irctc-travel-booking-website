@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Your Journey | TravelGo</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<header class="navbar">
+    <a class="logo" href="index.html">Travel<span>Go</span></a>
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="my-bookings.html">My Bookings</a>
+    </nav>
+</header>
+
+<main class="detail-page">
+    <div class="section-heading">
+        <div>
+            <span class="eyebrow">REAL-TIME STYLE JOURNEY UPDATES</span>
+            <h2>Track Your Journey</h2>
+            <p>Enter your demo vehicle number to check its journey status.</p>
+        </div>
+    </div>
+
+    <div class="tracking-search">
+        <select id="trackingType">
+            <option value="train">Train</option>
+            <option value="bus">Bus</option>
+        </select>
+        <input id="trackingNumber" placeholder="Enter train or bus number">
+        <button class="primary-btn" onclick="trackJourney()">Track Now</button>
+    </div>
+
+    <div id="trackingResult"></div>
+
+    <div class="tracking-image">
+        <img src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?w=1200" alt="Train journey">
+        <div>
+            <h2>Travel with confidence</h2>
+            <p>Stay informed about your journey with TravelGo.</p>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <p>© 2026 TravelGo. Educational frontend demonstration.</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
